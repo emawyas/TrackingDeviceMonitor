@@ -29,3 +29,31 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+<div>
+        <h1>Map Coordinates</h1>
+        <form method="post">
+            <fieldset>
+                <div>
+                    <label for="latitude">Latitude:&nbsp;&nbsp;&nbsp;</label>
+                    <input type="text" name="latitude" value="@Request["latitude"]" />
+                </div>
+                <div>
+                    <label for="longitude">Longitude:</label>
+                    <input type="text" name="longitude" value="@Request["longitude"]" />
+                </div>
+                <div>
+                    <input type="submit" value="Map It!" />
+                </div>
+            </fieldset>
+        </form>
+        @if (IsPost)
+        {
+            @Maps.GetBingHtml(key: "your-key-here",
+          latitude: Request["latitude"],
+          longitude: Request["longitude"],
+          width: "300",
+          height: "300"
+       )
+        }
+</div>

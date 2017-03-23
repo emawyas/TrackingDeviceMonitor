@@ -1,59 +1,36 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Device Tracking Monitor";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+<div>
+    <br />
+    <h3>Tracker Information:</h3>
+    @foreach (string attribute in ViewBag.TrackerInfo)
+    {
+        <p>@attribute</p>
+    }
 </div>
 
 <div>
-        <h1>Map Coordinates</h1>
-        <form method="post">
-            <fieldset>
-                <div>
-                    <label for="latitude">Latitude:&nbsp;&nbsp;&nbsp;</label>
-                    <input type="text" name="latitude" value="@Request["latitude"]" />
-                </div>
-                <div>
-                    <label for="longitude">Longitude:</label>
-                    <input type="text" name="longitude" value="@Request["longitude"]" />
-                </div>
-                <div>
-                    <input type="submit" value="Map It!" />
-                </div>
-            </fieldset>
-        </form>
-        @if (IsPost)
-        {
-            @Maps.GetBingHtml(key: "your-key-here",
-          latitude: Request["latitude"],
-          longitude: Request["longitude"],
-          width: "300",
-          height: "300"
-       )
+    <div id="googleMap" style="width:100%;height:400px;"></div>
+    <script>
+        function myMap() {
+            var coords = new google.maps.LatLng(@ViewBag.Lat, @ViewBag.Lng)
+            var mapProp = {
+                center: coords,
+                zoom: 14,
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            var marker = new google.maps.Marker({
+                position: coords,
+                map: map,
+                title: 'Tracker'
+            });
         }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz4PACaSGsEmcsIqvGORN9vOUcOTni3kY&callback=myMap"></script>
+</div>
+
+<div>
 </div>

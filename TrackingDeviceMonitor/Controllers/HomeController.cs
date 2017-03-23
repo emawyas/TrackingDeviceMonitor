@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrackingDeviceMonitor.Models;
 
 namespace TrackingDeviceMonitor.Controllers
 {
@@ -10,21 +11,29 @@ namespace TrackingDeviceMonitor.Controllers
     {
         public ActionResult Index()
         {
+            TrackingDevice device = getDevice();
+            ViewBag.TrackerInfo = new string[] { "Serial number: " + device.deviceSerial,
+                                  "Driver ID:" + device.driverId,
+                                  "Speed: " + device.Speed + " KM/H",
+                                  "Latitude: " + (device.latitude).ToString() ,
+                                  "Longitude: " + (device.longitude).ToString()};
+            ViewBag.Lat = device.latitude;
+            ViewBag.Lng = device.longitude;
             return View();
         }
 
-        public ActionResult About()
+        private TrackingDevice getDevice()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            TrackingDevice device = new TrackingDevice();
+            device.deviceSerial = "XD9872364239";
+            device.driverId = "123456789";
+            device.latitude = 24.958047;
+            device.longitude = 46.734460;
+            device.Speed = 120;
+            return device;
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
+
     }
 }

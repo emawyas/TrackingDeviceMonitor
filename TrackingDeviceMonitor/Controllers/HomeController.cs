@@ -20,7 +20,9 @@ namespace TrackingDeviceMonitor.Controllers
                                   "Driver ID:" + d.DriverId,
                                   "Speed: " + d.Speed.ToString() + " KM/H",
                                   "Latitude: " + (d.latitude).ToString() ,
-                                  "Longitude: " + (d.longitude).ToString()};
+                                  "Longitude: " + (d.longitude).ToString(),
+                                  "Heading: " + d.NS + d.EW + " at a " + d.heading.ToString() + " degrees",
+                                  "Time Updated: " + (d.GpsDateTime).ToString()};
             ViewBag.Lat = d.latitude;
             ViewBag.Lng = d.longitude;
             ViewBag.poly = d.CompleteRoute;

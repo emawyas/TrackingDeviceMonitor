@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,13 +13,24 @@ namespace TrackingDeviceMonitor.Controllers
         public ActionResult Index()
         {
             TrackingDevice device = getDevice();
-            ViewBag.TrackerInfo = new string[] { "Serial number: " + device.deviceSerial,
-                                  "Driver ID:" + device.driverId,
-                                  "Speed: " + device.Speed + " KM/H",
-                                  "Latitude: " + (device.latitude).ToString() ,
-                                  "Longitude: " + (device.longitude).ToString()};
-            ViewBag.Lat = device.latitude;
-            ViewBag.Lng = device.longitude;
+            DeviceTrackingServiceReference.WCFServiceClient client = new DeviceTrackingServiceReference.WCFServiceClient();
+            DeviceTrackingServiceReference.TrackingDevice d = client.getTrackingDevice("4CE04604EG");
+            Debug.WriteLine("route = " + d.Speed);
+            ViewBag.TrackerInfo = new string[] { "Serial number: " + d.DeviceSerial,
+                                  "Driver ID:" + d.DriverId,
+                                  "Speed: " + d.Speed.ToString() + " KM/H",
+                                  "Latitude: " + (d.latitude).ToString() ,
+                                  "Longitude: " + (d.longitude).ToString()};
+            ViewBag.Lat = d.latitude;
+            ViewBag.Lng = d.longitude;
+            ViewBag.poly = d.CompleteRoute;
+            string[] end = d.Destination.Split(',');
+            string[] start = d.Source.Split(',');
+            ViewBag.sLat = start[0];
+            ViewBag.sLng = start[1];
+            ViewBag.eLat = end[0];
+            ViewBag.eLng = end[1];
+
             return View();
         }
 

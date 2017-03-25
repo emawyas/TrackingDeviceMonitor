@@ -16,16 +16,44 @@
     <script>
         function myMap() {
             var coords = new google.maps.LatLng(@ViewBag.Lat, @ViewBag.Lng)
+            var start  = new google.maps.LatLng(@ViewBag.sLat, @ViewBag.sLng)
+            var end = new google.maps.LatLng(@ViewBag.eLat, @ViewBag.eLng);
+
+            var truck = {
+                url: '~/Icons/truck3.png'
+            };
+
+            var source = {
+                url: '~/Icons/star-3.png'
+            }
+
+            var destination = {
+                url: '~/Icons/asterisco.png'
+            }
             var mapProp = {
                 center: coords,
                 zoom: 14,
             };
             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
             var marker = new google.maps.Marker({
+                icon: '/Icons/truck3.png',
                 position: coords,
                 map: map,
                 title: 'Tracker'
             });
+            marker = new google.maps.Marker({
+                icon: '/Icons/star-3.png',
+                position: start,
+                map: map,
+                title: 'Start'
+            });
+            marker = new google.maps.Marker({
+                icon: '/Icons/asterisco.png',
+                position: end,
+                map: map,
+                title: 'Destination'
+            });
+
         }
     </script>
 

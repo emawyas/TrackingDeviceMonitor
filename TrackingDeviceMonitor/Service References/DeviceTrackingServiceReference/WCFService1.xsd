@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfTrackingDevice">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TrackingDevice" nillable="true" type="TrackingDevice" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTrackingDevice" nillable="true" type="ArrayOfTrackingDevice" />
+  <xs:complexType name="TrackingDevice">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompleteRoute" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Destination" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeviceSerial" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DriverId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EW" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirmWareVersion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GpsDateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MaxSpeed" type="xs:int" />
+      <xs:element minOccurs="0" name="NS" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Source" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Speed" type="xs:int" />
+      <xs:element minOccurs="0" name="heading" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="latitude" type="xs:double" />
+      <xs:element minOccurs="0" name="longitude" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TrackingDevice" nillable="true" type="TrackingDevice" />
+</xs:schema>
